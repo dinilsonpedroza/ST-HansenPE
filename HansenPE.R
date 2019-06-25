@@ -1,12 +1,12 @@
 #################Criando a ST de proporção de casos######################
 
 getwd()
-PCH<-read.csv2("Propor??odecasos.csv", header = T)
+PCH<-read.csv2("Proporçãoodecasos.csv", header = T)
 PCH
 PCHST<-ts(PCH, start = c(2001,01), frequency = 12)
 PCHST
 class(PCHST)
-plot(PCHST, ylab= "casos por 100 mil", xlab= "anos", main= "Hansen?ase em PE", col="blue")
+plot(PCHST, ylab= "casos por 100 mil", xlab= "anos", main= "Hanseníase em PE", col="blue")
 
 #################Criando a ST de proporçãoo de multibacilar###############
 
@@ -14,7 +14,7 @@ PCM<-read.csv2("Propor??omultibacilar.csv", header = T)
 PCM
 PCMST<-ts(PCM, start = c(2001,01), frequency = 12)
 PCMST
-plot(PCMST, ylab= "multibacilar por 100 mil", xlab= "anos", main= "Hansen?ase em PE", col="orange")
+plot(PCMST, ylab= "multibacilar por 100 mil", xlab= "anos", main= "Hanseníase em PE", col="orange")
 
 
 ################Criando a ST de proporção de incapacitados ###############
