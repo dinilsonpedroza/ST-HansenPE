@@ -1,4 +1,4 @@
-#################Criando a ST de propor??o de casos######################
+#################Criando a ST de proporção de casos######################
 
 getwd()
 PCH<-read.csv2("Propor??odecasos.csv", header = T)
@@ -8,7 +8,7 @@ PCHST
 class(PCHST)
 plot(PCHST, ylab= "casos por 100 mil", xlab= "anos", main= "Hansen?ase em PE", col="blue")
 
-#################Criando a ST de propor??o de multibacilar###############
+#################Criando a ST de proporçãoo de multibacilar###############
 
 PCM<-read.csv2("Propor??omultibacilar.csv", header = T)
 PCM
@@ -17,7 +17,7 @@ PCMST
 plot(PCMST, ylab= "multibacilar por 100 mil", xlab= "anos", main= "Hansen?ase em PE", col="orange")
 
 
-################Criando a ST de propor??o de incapacitados ###############
+################Criando a ST de proporção de incapacitados ###############
 
 PCI<-read.csv2("Propor??oincapacidade.csv",header = T)
 PCI
@@ -25,13 +25,13 @@ PCIST<-ts(PCI, start = c(2001,01), frequency = 12)
 plot(PCIST, ylab= "incapacitados por 100 mil", xlab= "anos", main= "Hansen?ase em PE", col="yellow")
 
 
-##########################Decompondo as s?ries############################
+##########################Decompondo as séries############################
 
 plot(decompose(PCHST))
 plot(decompose(PCMST))
 plot(decompose(PCIST))
 
-###############Estudando a sazonalidade das s?ries ######################
+###############Estudando a sazonalidade das séries ######################
 
 ################# estudando a sazonalidade da ST ######
 
@@ -44,15 +44,15 @@ monthplot(PCMST, ylab= "casos por 100 mil",
 monthplot(PCIST, ylab= "casos por 100 mil", 
           xlib="meses", col="blue")
 
-###############Estudando a estacionariedade das s?ries###################
+###############Estudando a estacionariedade das séries###################
 ###############Aplicando o teste Dickey-Fuller em casos(PCHST) ##########
 library(urca)
 summary(ur.df(PCHST, type='none', lags=0))
-#######A s?rie PCHST ? n?o estacion?ria##################################
+#######A série PCHST é não estacionária##################################
 
 ###############Aplicando o teste Dickey-Fuller em multibacilar(PCMST) ###
 summary(ur.df(PCMST, type='none', lags=0))
-#######A s?rie PCMST ? n?o estacion?ria##################################
+#######A série PCMST é não estacionária##################################
 
 ###############Aplicando o teste Dickey-Fuller em incapacitados (PCIST) #
 summary(ur.df(PCIST, type='none', lags=0))
@@ -61,20 +61,20 @@ summary(ur.df(PCIST, type='none', lags=0))
 ###############Diferenciando as s?ries###################################
 
 dfPCHST <- diff(PCHST)
-plot(dfPCHST, main = "st com 1? diferen?a", ylab="1? diferen?a", 
+plot(dfPCHST, main = "st com 1? diferença", ylab="1? diferença", 
      xlab="tempo", col="blue")
 dfPCMST<-diff(PCMST)
-plot(dfPCMST, main = "st com 1? diferen?a", ylab="1? diferen?a", 
+plot(dfPCMST, main = "st com 1? diferença", ylab="1? diferença", 
      xlab="tempo", col="blue")
 dfPCIST<-diff(PCIST)
-plot(dfPCIST, main = "st com 1? diferen?a", ylab="1? diferen?a", 
+plot(dfPCIST, main = "st com 1? diferença", ylab="1? diferença", 
      xlab="tempo", col="blue")
 
-###############Aplicando o teste Dickey-Fuller nas s?ries diferenciadas##
+###############Aplicando o teste Dickey-Fuller nas séries diferenciadas##
 summary(ur.df(dfPCHST, type='none', lags=0))
 summary(ur.df(dfPCMST, type='none', lags=0))
 summary(ur.df(dfPCIST, type='none', lags=0))
-###############Todas s?o estacion?rias###################################
+###############Todas são estacionárias###################################
 
 ###############Modelos SARIMAS###########################################
 
@@ -141,14 +141,14 @@ accuracy(AUTPCHST)
 accuracy(AUTPCMST)
 accuracy(AUTPCIST)
 
-###########################Estudando os res?duos#############################
+###########################Estudando os resíduos#############################
 
 checkresiduals(AUTPCHST)
 checkresiduals(AUTPCMST)
 checkresiduals(AUTPCIST)
 
 #############################################################################
-######################Previs?es##############################################
+######################Previsões##############################################
 #############################################################################
 
 forecast.PCH <- forecast(SARPCHST, h=60)
@@ -157,16 +157,16 @@ forecast.PCM <- forecast(SARPCMST, h=60)
 forecast.PCM
 forecast.PCI <- forecast(SARPCIST, h=60)
 forecast.PCI
-######################Gr?ficos da Previs?o###################################
+######################Gr?ficos da Previsão###################################
 
-plot(forecast(SARPCHST, h=60, level=0.95), ylab="propor??o de casos por 100 mil hab.", xlab = "tempo", 
-     main = "Gr?fico 16: previs?o da propor??o de casos")
+plot(forecast(SARPCHST, h=60, level=0.95), ylab="proporção de casos por 100 mil hab.", xlab = "tempo", 
+     main = "Gr?fico 16: previsão da proporção de casos")
 
 plot(forecast(SARPCMST, h=60,level=0.95), ylab="casos multibacilares por cem mil hab.", xlab = "tempo",
-     main = "Gr?fico 17: previs?o de casos multibacilares" )
+     main = "Gr?fico 17: previsão de casos multibacilares" )
 
 plot(forecast(SARPCIST, h=60, level=0.95), ylab = "incapacitados", xlab = "tempo",
-     main = "Gr?fico 18: previs?o de incapacitados por 100 mil hab.")
+     main = "Gr?fico 18: previsão de incapacitados por 100 mil hab.")
 
 library(knitr)
 devtools::install_github("rstudio/rmarkdown")
@@ -186,15 +186,15 @@ checkX13()
 ######testando a sazonalidade na propor??o de casos############################
 PCHSTajustada <- seas(PCHST)
 qs(PCHSTajustada)
-######Conclu?-se que h? componente sazonal nesta s?rie original################
+######Conclu?-se que há componente sazonal nesta série original################
 
 ######testando a sazonalidade na s?rie de casos multibacilares#################
 PCMSTajustada<-seas(PCMST)
 qs(PCMSTajustada)
-######Conclu?-se que h? componente sazonal nesta s?rie original################
+######Concluí-se que há componente sazonal nesta série original################
 
-######testando a sazonalidade na s?rie de incapacitados########################
+######testando a sazonalidade na série de incapacitados########################
 PCISTajustada<-seas(PCIST)
 qs(PCISTajustada)
-######Conclu?-se que h? componente sazonal nesta s?rie original################
+######Concluí-se que há componente sazonal nesta série original################
 
